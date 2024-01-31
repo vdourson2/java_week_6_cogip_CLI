@@ -27,7 +27,6 @@ public class CompanyObject {
 	@SuppressWarnings("unchecked")
     @JsonProperty("contacts")
 	private void unpackNestedContacts(List<Map<String, String>> companyContacts) {
-		
 		companyContacts.forEach((contact) -> {
 			contact.remove("id");
 			contact.remove("timestamp");
@@ -66,5 +65,12 @@ public class CompanyObject {
 	public void setContacts(List<Map<String, String>> contacts) {
 		this.contacts = contacts;
 	}
+
+	@Override
+	public String toString() {
+		return "Company [name=" + name + ", tva=" + tva + ", invoicesId=" + invoicesId + ", contacts=" + contacts
+				+ "]";
+	}
+	
 	
 }

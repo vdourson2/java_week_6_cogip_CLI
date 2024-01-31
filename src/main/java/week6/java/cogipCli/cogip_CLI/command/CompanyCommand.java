@@ -41,29 +41,25 @@ public class CompanyCommand {
 		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
     	String productsJson = response.getBody();
 		
+    	//Initialize objectMapper to deserialize from Json to a list of CompanyObjects
     	ObjectMapper objectMapper = new ObjectMapper();
     	objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    	List<CompanyObject> companies = new ArrayList<>();
+    	    	
     	try {
+    		List<CompanyObject> companies = new ArrayList<>();
 	    	companies = objectMapper.readValue(productsJson, new TypeReference<List<CompanyObject>>(){});
-	    	String prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(companies);
-	    	return prettyJson;
+	    	if (pretty) {
+	    		String prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(companies);
+	    		return prettyJson;
+	    	}
+	    	else {
+	    		return companies.toString();
+	    	}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-    	return "Blabla";
-
-//		String productsJson;
-//		if (!pretty) {
-
-//        }
-//		else {
-//			
-//			
-//			productsJson = "This is pretty Json";
-//		}
-        
+    	
+    	return productsJson;
         
 	}
 	
