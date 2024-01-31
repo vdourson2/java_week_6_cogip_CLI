@@ -103,3 +103,70 @@
 1706538072563:edituser 3 --username newUsername --role newRole
 1706538270088:edituser 3 --username Val --role user
 1706539682823:deluser 17
+1706690956759:exit
+1706690996596:help
+1706691006205:quit
+1706691136237:help
+1706691198541:getcontact
+1706691208892:allcontact
+1706691274172:allcontact --pretty
+1706692436142:adduser Valentin Password1234# admin
+1706692443960:exit
+1706692869050:allusers --pretty
+1706692887154:allusers
+1706692994719:adduser Valentin Password1234# admin
+1706693555137:allusers
+1706693566411:adduser Valentin Test1234# admin
+1706694853588:adduser Valentin Test134# admin
+1706694893311:adduser Valentin TEst1345# admin
+1706695037359:alluser
+1706695042529:allusers
+1706697282976:stacktrace
+1706697601530:allusers
+1706697707041:postuser Valentrain Test1234# admin
+1706697721719:adduser Valentrain Password1234# admin
+1706698282431:allcontact
+1706698288742:allcontact --pretty
+1706699256755:allcontacts
+1706699291402:allcontact --pretty
+1706699298816:allcontacts --pretty
+1706699349000:allcontacts
+1706699351649:stacktrace
+1706699567420:allcontacts
+1706699586018:stacktrace
+1706699654566:allcontacts
+1706699658965:stackstrace
+1706699661710:stacktrace
+1706699701116:allcontacts
+1706699705167:stacktrace
+1706699888774:allcontacts
+1706699899552:stacktrace
+1706699997521:allcontacts
+1706700002606:stacktrace
+1706700057889:allcontacts
+1706700061189:stacktrace
+1706700102200:allcontacts
+1706700105757:stacktrace
+1706700134664:allcontacts
+1706700405917:allcontacts --pretty
+1706700558261:allcontacts
+1706704841196:allcontacts --pretty
+1706705647380:allcontacts
+1706705652428:allcontact --pretty
+1706705656761:allcontacts --pretty
+1706705859517:stacktrace
+1706705952184:allcontacts --pretty
+1706708408339:allcontacts
+1706708442529:allcontacts --pretty
+1706709104016:allcontacts
+1706709268357:stacktrace
+1706709307694:allcontacts
+1706709442747:allcontacts --pretty
+1706709602960:allcontacts
+1706711221568:allcontacts --pretty
+1706711320922:allcontacts
+1706711927712:allcontacts --pretty
+1706712282302:allcontacts
+1706712660979:allcontacts --pretty
+1706712870341:allcontacts
+1706712930375:allcontacts --pretty
