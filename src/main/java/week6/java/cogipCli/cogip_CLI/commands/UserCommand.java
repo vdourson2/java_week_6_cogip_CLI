@@ -83,6 +83,7 @@ public class UserCommand {
     return restTemplate.exchange("http://localhost:8080/api/user/" + id + "?" + usernameParam + passwordParam + roleParam, HttpMethod.PUT, request, String.class).getBody();
   }
   
+  // Delete User Command (deluser {ID})
   @ShellMethod(value = "Delete User", key = "deluser", group = "User")
   public void delUser (int id){
     restTemplate.delete("http://localhost:8080/api/user/" + id, HttpMethod.DELETE, String.class);
