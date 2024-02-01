@@ -49,7 +49,7 @@ public class UserCommand {
   
   // Post User Command (adduser {USERNAME} {PASSWORD} {ROLE})
   @ShellMethod(value = "Post User", key = "adduser", group = "User")
-  public String postUser(String username, String password, @ShellOption (defaultValue = "USER")String role) {
+  public String postContact(String username, String password, @ShellOption (defaultValue = "USER")String role) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     
