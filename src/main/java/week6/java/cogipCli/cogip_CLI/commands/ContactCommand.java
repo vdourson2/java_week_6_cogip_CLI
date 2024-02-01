@@ -60,7 +60,7 @@ public class ContactCommand {
   
   // Post Contact Command (addcontact {FIRSTNAME} {LASTNAME} {PHONE} {EMAIL} {COMPANYID})
   @ShellMethod(value = "Post Contact", key = "addcontact", group = "Contact")
-  public String postUser(String firstname, String lastname, String phone, String email, Integer companyId) {
+  public String postContact(String firstname, String lastname, String phone, String email, Integer companyId) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     
