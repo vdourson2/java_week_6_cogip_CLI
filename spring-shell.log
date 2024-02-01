@@ -43,3 +43,4 @@
 1706800624070:add_company --pretty --name SNCCTBG --country Hell --tva 1234567888 --type provider
 1706801089183:add_company --pretty --name AZERTY --country Sunland --tva 1234567988 --type provider
 1706801186226:stacktrace
+1706802747615:get_company --pretty --id 1

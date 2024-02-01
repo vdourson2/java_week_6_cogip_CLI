@@ -36,7 +36,7 @@ public class CompanyCommand {
 	}
 	
 	//This command list the companies with essential informations: name, VAT number, associated invoices, and contacts.
-	@ShellMethod(key="companies", value="Company listing with essential information: name, VAT number, associated invoices, and contacts")
+	@ShellMethod(key="get_companies", value="Company listing with essential information: name, VAT number, associated invoices, and contacts")
 	public String listCompanies(@ShellOption (defaultValue = "false", help="Raw or pretty") boolean pretty, 
 								@ShellOption (defaultValue = "all", help = "The two possible types are client or provider") String type) {
 		
@@ -72,6 +72,39 @@ public class CompanyCommand {
     	return productsJson;
 	}
 	
+	//Get a company based on the id
+	@ShellMethod(key="get_company", value="Get essential informations about the company : name, VAT number, associated invoices, and contacts")
+	public String getCompany(@ShellOption (defaultValue = "false", help="Raw or pretty") boolean pretty,
+							 @ShellOption String id) {
+		
+		String url = "http://localhost:8080/api/company/" + id;
+		
+		// Fetch JSON response as String wrapped in ResponseEntity
+		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+    	String productsJson = response.getBody();
+		
+    	//Initialize objectMapper to deserialize from Json to a CompanyObject
+    	ObjectMapper objectMapper = new ObjectMapper();
+    	objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    	    	
+    	try {
+    		//Deserialize from Json to a CompanyObject
+    		CompanyObject company = new CompanyObject();
+	    	company = objectMapper.readValue(productsJson, CompanyObject.class);
+	    	if (pretty) { //Pretty display
+	    		String prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(company);
+	    		return prettyJson;
+	    	}
+	    	else { //Raw display
+	    		return company.toString();
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	return productsJson;
+	}
+	
 	//Register a new company
 	@ShellMethod(key="add_company", value="Register a new Company with its name, country, vat and type")
 	public String addCompany(@ShellOption (defaultValue = "false", help="Raw or pretty") boolean pretty, 
@@ -99,6 +132,12 @@ public class CompanyCommand {
 		String companyResultAsJsonStr = restTemplate.postForObject(createUrl, request, String.class);
 		
 		return companyResultAsJsonStr;
+	}
+	
+	//Delete a company based on the id
+	@ShellMethod(key="delete_company", value="Register a new Company with its name, country, vat and type")
+	public String deleteCompany(@ShellOption (defaultValue = "false", help="Raw or pretty") boolean pretty) {
+		return "";
 	}
 	
 }
