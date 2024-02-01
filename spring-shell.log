@@ -184,3 +184,14 @@
 1706785203488:addcontact 1 jean michel 00000000000 test@test.com
 1706785237030:addcontact jean michel 000000000000 test@test.com 1
 1706785277483:addcontact jean michel 0474578962 test@test.com 1
+1706793117622:editcontact 5 --firstname Mich
+1706793142052:stacktrace
+1706793182805:editcontact 5 --firstname Mich
+1706793450944:editcontact 5 --lastname Paul
+1706793470242:editcontact 5 --phone 1234567890
+1706793492699:edit contact 5 --email edit@edit.edit
+1706793510730:editcontact 5 --email edit@edit.edit
+1706793999712:editcontact 5 --companyId 2
+1706794066518:editcontact 5 --companyid 3
+1706794124020:editcontact 5 --companyid 5
+1706794140508:editcontact 5 --companyid 3

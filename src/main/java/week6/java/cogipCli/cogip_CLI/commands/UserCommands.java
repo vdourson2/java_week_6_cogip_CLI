@@ -13,7 +13,7 @@ import org.springframework.shell.standard.ShellOption;
 import org.springframework.web.client.RestTemplate;
 
 @ShellComponent
-public class UserCommand {
+public class UserCommands {
   
   private String getString(@ShellOption({"--pretty"}) boolean pretty, String response) {
     if (pretty) {
