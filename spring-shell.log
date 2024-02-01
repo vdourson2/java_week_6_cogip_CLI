@@ -28,3 +28,18 @@
 1706786824999:history help
 1706786835734:help history
 1706786855095:help companies
+1706799314751:help add_company
+1706799443697:add_company --pretty --name SNCCTBG --country Hell --vat 1234567888 --type provider
+1706800275780:add_company --pretty --name SNCCTBG --country Hell --tva 1234567888 --type provider
+1706800485185:String requestJson = "{\\"name\\":\\"Delatour\\",\\"specialization\\":\\"Gynecologist\\"}";
+1706800485197://        HttpHeaders headers = new HttpHeaders();
+1706800485204://        headers.setContentType(MediaType.APPLICATION_JSON);
+1706800485206://
+1706800485214://        HttpEntity<String> request = new HttpEntity<String>(requestJson, headers);
+1706800485215://
+1706800485221://        // Send the request body in HttpEntity for HTTP POST request
+1706800485226://        String productCreateResponse = restTemplate
+1706800500240://               .postForObject(resourceUrl, request, String.class);add_company --pretty --name SNCCTBG --country Hell --tva 1234567888 --type provider
+1706800624070:add_company --pretty --name SNCCTBG --country Hell --tva 1234567888 --type provider
+1706801089183:add_company --pretty --name AZERTY --country Sunland --tva 1234567988 --type provider
+1706801186226:stacktrace
