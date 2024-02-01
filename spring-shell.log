@@ -103,3 +103,34 @@
 1706538072563:edituser 3 --username newUsername --role newRole
 1706538270088:edituser 3 --username Val --role user
 1706539682823:deluser 17
+1706540350058:help
+1706540363552:allusers
+1706540837716:allcontacts
+1706540863901:login --username Test --password Password#1
+1706540930637:stacktrace
+1706541077470:login --username Test --password Password#1
+1706541090097:stacktrace
+1706541357293:allusers
+1706541363942:allcontacts
+1706541436383:allusers
+1706541439452:allcontacts
+1706541460972:login --username Test --password Password#1
+1706541467765:allcontacts
+1706541475729:stacktrace
+1706542365710:login --username Test --password Password#1
+1706542372448:allcontacts
+1706542380549:login --username Test --password Password#1
+1706542385377:allcontacts
+1706542422275:login --username Test --password Password#1
+1706542427025:allcontacts
+1706542450671:login --username Test --password Password#1
+1706542454937:allcontacts
+1706542479253:login --username Test --password Password#1
+1706542483465:allcontacts
+1706544990962:login --username Test --password Password#1
+1706544997027:allcontacts
+1706545006140:stacktrace
+1706785203390:login --username Admin --password Admin
+1706785213181:help
+1706785254548:login --username Admin --password Admin#1
+1706785460689:login Admin Admin#1
