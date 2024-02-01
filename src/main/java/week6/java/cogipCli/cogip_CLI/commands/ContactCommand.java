@@ -47,12 +47,15 @@ public class ContactCommand {
     
   }
   
-  // Get Contact By ID Command (userid {ID}, userid {ID} --pretty)
+  // Get Contact By ID Command (contactid {ID}, contactid {ID} --pretty)
   @ShellMethod(value = "Get Contact by ID", key = "contactid", group = "Contact")
-  public String getContactById(int id, @ShellOption(defaultValue = "false") boolean pretty){
-    String response = restTemplate.getForObject("http://localhost:8080/api/contact/" + id, String.class);
+  public String getContactById(int id, @ShellOption(value = {"--pretty"}) boolean pretty) throws JsonProcessingException {
+    ContactMapping contactMappings = new ObjectMapper()
+            .readerFor(new TypeReference<ContactMapping>() {})
+            .readValue(restTemplate.getForObject("http://localhost:8080/api/contact/" + id, String.class));
     
-    return getString(pretty, response);
+    String json = new ObjectMapper().writeValueAsString(contactMappings);
+    return getString(pretty, json);
   }
   
   // Post User Command (postuser {USERNAME} {PASSWORD} {ROLE})
