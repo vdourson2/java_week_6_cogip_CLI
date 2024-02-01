@@ -103,13 +103,9 @@ public class ContactCommands {
     return restTemplate.exchange(url, HttpMethod.PUT, request, String.class).getBody();
   }
   
-  
-  
-  
-  
-  // Delete User Command (deluser {ID})
+  // Delete Contact Command (delcontact {ID})
   @ShellMethod(value = "Delete Contact", key = "delcontact", group = "Contact")
-  public void delUser (int id){
+  public void delContact (int id){
     restTemplate.delete("http://localhost:8080/api/contact/" + id, HttpMethod.DELETE, String.class);
   }
 }
