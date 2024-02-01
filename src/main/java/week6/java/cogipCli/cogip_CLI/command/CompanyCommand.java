@@ -33,9 +33,14 @@ public class CompanyCommand {
 	
 	//This command list the companies with essential informations: name, VAT number, associated invoices, and contacts.
 	@ShellMethod(key="companies", value="Company listing with essential information: name, VAT number, associated invoices, and contacts")
-	public String listCompanies(@ShellOption (defaultValue = "false") boolean pretty) {
+	public String listCompanies(@ShellOption (defaultValue = "false", help="Raw or pretty") boolean pretty, 
+								@ShellOption (defaultValue = "all", help = "The two ossible types are client or provider") String type) {
 		
-		String url = "http://localhost:8080/api/company";
+		if (!type.equals("all") && !type.equals("client") && !type.equals("provider")) {
+			return "No such type of company";
+		}
+		
+		String url = (type.equals("all")) ? "http://localhost:8080/api/company" : "http://localhost:8080/api/company/type/" + type;
 		
 		// Fetch JSON response as String wrapped in ResponseEntity
 		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
@@ -60,34 +65,6 @@ public class CompanyCommand {
 		}
     	
     	return productsJson;
-        
 	}
-	
-//	//This command displays a company with essential informations: name, VAT number, associated invoices, and contacts.
-//		@ShellMethod(key="company", value="All information about a companyCompany listing with essential information: name, VAT number, associated invoices, and contacts")
-//		public String displayCompany(@ShellOption (defaultValue = "false") boolean pretty) {
-//			
-//			String url = "http://localhost:8080/api/company/1";
-//			
-//			// Fetch JSON response as String wrapped in ResponseEntity
-//			ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-//	    	String productsJson = response.getBody();
-//			
-//	    	ObjectMapper objectMapper = new ObjectMapper();
-//	    	objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//	    	CompanyObject company = new CompanyObject();
-//	    	try {
-//		    	company = objectMapper.readValue(productsJson, CompanyObject.class);
-//		    	String prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(company);
-//		    	return prettyJson;
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//
-//	    	return "Blabla";
-//
-//		}
-
-	
 	
 }

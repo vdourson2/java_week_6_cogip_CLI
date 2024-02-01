@@ -14,6 +14,6 @@ public class CogipCliApplication {
 
 	@Bean
     public RestTemplate getRestTemplate() {
-      return new RestTemplate();
+		return new RestTemplate();
    }
 }

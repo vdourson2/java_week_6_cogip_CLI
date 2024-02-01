@@ -12,18 +12,18 @@ public class CompanyObject {
 	
 	private String tva;
 	
-	//Voir si ce new arrayList est judicieux...
 	private List<Integer> invoicesId = new ArrayList<>();
 	
-	//Voir si ce new arrayList est judicieux...
 	private List<Map<String,String>> contacts = new ArrayList<>();
 	
+	//Mapping nested invoices, keeping just the id for each invoice
 	@SuppressWarnings("unchecked")
     @JsonProperty("invoices")
     private void unpackNestedInvoices(List<Map<String, Object>> invoices) {
 		invoices.forEach((invoice) -> this.invoicesId.add((Integer)invoice.get("id"))); 
     }
 	
+	//Mapping nested contacts, keeping just the firstname, lastname, phone and email for each contact
 	@SuppressWarnings("unchecked")
     @JsonProperty("contacts")
 	private void unpackNestedContacts(List<Map<String, String>> companyContacts) {
