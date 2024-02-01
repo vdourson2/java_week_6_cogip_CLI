@@ -178,3 +178,9 @@
 1706777864269:contactis 1
 1706777876189:contactid 1
 1706777884885:contactid 1 --pretty
+1706785145063:addcontact 1 jean michel 00000000 test@test.com
+1706785160170:stacktrace
+1706785176846:addcontact jean michel 00000000 test@test.com 1
+1706785203488:addcontact 1 jean michel 00000000000 test@test.com
+1706785237030:addcontact jean michel 000000000000 test@test.com 1
+1706785277483:addcontact jean michel 0474578962 test@test.com 1

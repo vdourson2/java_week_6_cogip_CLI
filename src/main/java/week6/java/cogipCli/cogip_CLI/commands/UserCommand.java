@@ -47,7 +47,7 @@ public class UserCommand {
     return getString(pretty, response);
   }
   
-  // Post User Command (postuser {USERNAME} {PASSWORD} {ROLE})
+  // Post User Command (adduser {USERNAME} {PASSWORD} {ROLE})
   @ShellMethod(value = "Post User", key = "adduser", group = "User")
   public String postUser(String username, String password, @ShellOption (defaultValue = "USER")String role) {
     HttpHeaders headers = new HttpHeaders();

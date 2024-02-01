@@ -58,25 +58,30 @@ public class ContactCommand {
     return getString(pretty, json);
   }
   
-  // Post User Command (postuser {USERNAME} {PASSWORD} {ROLE})
+  // Post Contact Command (addcontact {FIRSTNAME} {LASTNAME} {PHONE} {EMAIL} {COMPANYID})
   @ShellMethod(value = "Post Contact", key = "addcontact", group = "Contact")
-  public String postUser(String username, String password, @ShellOption (defaultValue = "USER")String role) {
+  public String postUser(String firstname, String lastname, String phone, String email, Integer companyId) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode userJsonObject = mapper.createObjectNode();
-    userJsonObject.put("username", username);
-    userJsonObject.put("password", password);
+    userJsonObject.put("firstname", firstname);
+    userJsonObject.put("lastname", lastname);
+    userJsonObject.put("phone", phone);
+    userJsonObject.put("email", email);
+    
     
     HttpEntity<String> request = new HttpEntity<>(userJsonObject.toString(), headers);
     
-    return restTemplate.postForObject("http://localhost:8080/api/user?role=" + role.toUpperCase(), request, String.class);
+    return restTemplate.postForObject("http://localhost:8080/api/contact?companyId=" + companyId, request, String.class);
   }
   
   // Edit User Command (edituser {ID} --username {USERNAME} &&/|| --password {PASSWORD} &&/|| --role {ROLE})
   @ShellMethod(value = "Edit Contact", key = "editcontact", group = "Contact")
-  public String putUser(int id, @ShellOption(defaultValue = ShellOption.NULL) String username, @ShellOption(defaultValue = ShellOption.NULL) String password, @ShellOption(defaultValue = ShellOption.NULL) String role) {
+  public String putUser(int id, @ShellOption(defaultValue = ShellOption.NULL) String username,
+                        @ShellOption(defaultValue = ShellOption.NULL) String password,
+                        @ShellOption(defaultValue = ShellOption.NULL) String role) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     
