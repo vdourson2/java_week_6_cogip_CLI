@@ -68,7 +68,8 @@ public class UserCommands {
   // Post User Command (adduser {USERNAME} {PASSWORD} {ROLE})
   @ShellMethod(value = "Post User", key = "adduser", group = "User")
   public String postUser(String username, String password, @ShellOption (defaultValue = "USER")String role) {
-    headers.setBearerAuth(tokenWrapper.getToken());
+    //headers.setBearerAuth(tokenWrapper.getToken());
+    if (tokenWrapper.getToken() != null) headers.setBearerAuth(tokenWrapper.getToken());
     
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode userJsonObject = mapper.createObjectNode();

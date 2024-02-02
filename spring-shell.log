@@ -197,3 +197,15 @@
 1706873431732:login Admin Admin#1
 1706873437356:addcontact test1 testing 0123456789 test@test.com 1
 1706873447408:delcontact 18
+1706877444204:help
+1706877457093:allcontacts
+1706877484160:login Admin Admin#1
+1706877488154:allcontacts
+1706877603000:help
+1706881736847:allcontacts
+1706882080252:adduser Admin Admin#1
+1706882123041:allcontacts
+1706882132621:adduser Admin Admin#1
+1706882137268:stacktrace
+1706882207236:adduser Admin Admin#1
+1706882412697:login Admin Admin#1
