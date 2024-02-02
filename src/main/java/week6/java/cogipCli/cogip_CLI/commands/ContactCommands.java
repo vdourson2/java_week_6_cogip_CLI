@@ -4,11 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
@@ -16,8 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import week6.java.cogipCli.cogip_CLI.entities.ContactMapping;
 import week6.java.cogipCli.cogip_CLI.security.BearerTokenWrapper;
 
-import java.io.DataInput;
-import java.io.IOException;
 import java.util.List;
 
 @ShellComponent
@@ -39,15 +33,17 @@ public class ContactCommands {
   RestTemplate restTemplate = new RestTemplate();
   BearerTokenWrapper tokenWrapper;
 
-  public ContactCommand(BearerTokenWrapper tokenWrapper){
+  HttpHeaders headers = new HttpHeaders();
+
+  public ContactCommands(BearerTokenWrapper tokenWrapper){
     this.tokenWrapper = tokenWrapper;
+    headers.setContentType(MediaType.APPLICATION_JSON);
   }
  
   
   // Get All Contact Command (allcontact, allcontact --pretty)
   @ShellMethod(value = "Get All Contacts", key = "allcontacts", group = "Contact")
   public String getAllContacts(@ShellOption(value = {"--pretty"})boolean pretty) throws JsonProcessingException {
-    HttpHeaders headers = new HttpHeaders();
     headers.setBearerAuth(tokenWrapper.getToken());
     HttpEntity <String> request = new HttpEntity <> (headers);
 
@@ -63,9 +59,12 @@ public class ContactCommands {
   // Get Contact By ID Command (contactid {ID}, contactid {ID} --pretty)
   @ShellMethod(value = "Get Contact by ID", key = "contactid", group = "Contact")
   public String getContactById(int id, @ShellOption(value = {"--pretty"}) boolean pretty) throws JsonProcessingException {
+    headers.setBearerAuth(tokenWrapper.getToken());
+    HttpEntity <String> request = new HttpEntity <> (headers);
+
     ContactMapping contactMappings = new ObjectMapper()
             .readerFor(new TypeReference<ContactMapping>() {})
-            .readValue(restTemplate.getForObject("http://localhost:8080/api/contact/" + id, String.class));
+            .readValue(restTemplate.exchange("http://localhost:8080/api/contact/" + id, HttpMethod.GET, request, String.class).getBody());
     
     String json = new ObjectMapper().writeValueAsString(contactMappings);
     return getString(pretty, json);
@@ -74,9 +73,8 @@ public class ContactCommands {
   // Post Contact Command (addcontact {FIRSTNAME} {LASTNAME} {PHONE} {EMAIL} {COMPANYID})
   @ShellMethod(value = "Post Contact", key = "addcontact", group = "Contact")
   public String postContact(String firstname, String lastname, String phone, String email, Integer companyId) {
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    
+    headers.setBearerAuth(tokenWrapper.getToken());
+
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode contactJsonObject = mapper.createObjectNode();
     contactJsonObject.put("firstname", firstname);
@@ -97,9 +95,8 @@ public class ContactCommands {
                            @ShellOption(defaultValue = ShellOption.NULL) String phone,
                            @ShellOption(defaultValue = ShellOption.NULL) String email,
                            @ShellOption(defaultValue = ShellOption.NULL)Integer companyid) {
-    
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    headers.setBearerAuth(tokenWrapper.getToken());
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode contactJsonObject = mapper.createObjectNode();
     
@@ -118,7 +115,10 @@ public class ContactCommands {
   
   // Delete Contact Command (delcontact {ID})
   @ShellMethod(value = "Delete Contact", key = "delcontact", group = "Contact")
-  public void delContact (int id){
-    restTemplate.delete("http://localhost:8080/api/contact/" + id, HttpMethod.DELETE, String.class);
+  public String delContact (int id){
+    headers.setBearerAuth(tokenWrapper.getToken());
+    HttpEntity <String> request = new HttpEntity <> (headers);
+
+    return restTemplate.exchange("http://localhost:8080/api/contact/" + id, HttpMethod.DELETE, request, String.class).toString();
   }
 }

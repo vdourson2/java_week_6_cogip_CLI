@@ -164,3 +164,36 @@
 1706866733601:allcontacts
 1706866844641:login Admin Admin#1
 1706866849786:allcontacts
+1706867405958:allusers
+1706867424219:stacktrace
+1706867442138:allcontacts
+1706867668110:stacktrace
+1706867693114:login Admin Admin#1
+1706867698717:allusers
+1706867703642:allcontacts
+1706867709452:allusers
+1706867755836:login Admin Admin#1
+1706867759491:allusers
+1706867763128:allcontacts
+1706867819659:login Admin Admin#1
+1706867822207:allusers
+1706868060351:login Admin Admin#1
+1706868064483:allusers
+1706868083504:userid 1 --pretty
+1706868120425:adduser test testing#2
+1706868154194:edituser --id 1
+1706868165554:deluser 1
+1706871973130:allcontacts
+1706872007905:allusers
+1706872015218:allcontacts
+1706873125079:login Admin Admin
+1706873140538:login Admin Admin#1
+1706873144992:allcontacts
+1706873165433:contactid 1
+1706873208836:addcontact test1 testing 0123456789 test@test.com 1
+1706873228390:editcontact 1 --firstname test2
+1706873253746:delcontact 17
+1706873419513:addcontact test1 testing 0123456789 test@test.com 1
+1706873431732:login Admin Admin#1
+1706873437356:addcontact test1 testing 0123456789 test@test.com 1
+1706873447408:delcontact 18
