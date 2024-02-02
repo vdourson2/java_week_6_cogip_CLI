@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,7 +14,10 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.web.client.RestTemplate;
 import week6.java.cogipCli.cogip_CLI.entities.ContactMapping;
+import week6.java.cogipCli.cogip_CLI.security.BearerTokenWrapper;
 
+import java.io.DataInput;
+import java.io.IOException;
 import java.util.List;
 
 @ShellComponent
@@ -33,14 +37,23 @@ public class ContactCommand {
   }
   
   RestTemplate restTemplate = new RestTemplate();
+  BearerTokenWrapper tokenWrapper;
+
+  public ContactCommand(BearerTokenWrapper tokenWrapper){
+    this.tokenWrapper = tokenWrapper;
+  }
  
   
   // Get All Contact Command (allcontact, allcontact --pretty)
   @ShellMethod(value = "Get All Contacts", key = "allcontacts", group = "Contact")
   public String getAllContacts(@ShellOption(value = {"--pretty"})boolean pretty) throws JsonProcessingException {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setBearerAuth(tokenWrapper.getToken());
+    HttpEntity <String> request = new HttpEntity <> (headers);
+
     List<ContactMapping> contactMappings = new ObjectMapper()
             .readerFor(new TypeReference<List<ContactMapping>>() {})
-            .readValue(restTemplate.getForObject("http://localhost:8080/api/contact", String.class));
+            .readValue(restTemplate.exchange("http://localhost:8080/api/contact", HttpMethod.GET ,request, String.class).getBody());
     
     String json = new ObjectMapper().writeValueAsString(contactMappings);
     return getString(pretty, json);
