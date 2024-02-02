@@ -2,6 +2,8 @@ package week6.java.cogipCli.cogip_CLI;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class CogipCliApplication {
@@ -10,4 +12,8 @@ public class CogipCliApplication {
 		SpringApplication.run(CogipCliApplication.class, args);
 	}
 
+	@Bean
+    public RestTemplate getRestTemplate() {
+      return new RestTemplate();
+   }
 }

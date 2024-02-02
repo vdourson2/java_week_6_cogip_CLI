@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 
 @ShellComponent
-public class ContactCommand {
+public class ContactCommands {
   private String getString(@ShellOption({"--pretty"}) boolean pretty, String response) {
     if (pretty) {
       // pretty print the response
@@ -78,43 +78,47 @@ public class ContactCommand {
     headers.setContentType(MediaType.APPLICATION_JSON);
     
     ObjectMapper mapper = new ObjectMapper();
-    ObjectNode userJsonObject = mapper.createObjectNode();
-    userJsonObject.put("firstname", firstname);
-    userJsonObject.put("lastname", lastname);
-    userJsonObject.put("phone", phone);
-    userJsonObject.put("email", email);
+    ObjectNode contactJsonObject = mapper.createObjectNode();
+    contactJsonObject.put("firstname", firstname);
+    contactJsonObject.put("lastname", lastname);
+    contactJsonObject.put("phone", phone);
+    contactJsonObject.put("email", email);
     
     
-    HttpEntity<String> request = new HttpEntity<>(userJsonObject.toString(), headers);
+    HttpEntity<String> request = new HttpEntity<>(contactJsonObject.toString(), headers);
     
     return restTemplate.postForObject("http://localhost:8080/api/contact?companyId=" + companyId, request, String.class);
   }
   
-  // Edit User Command (edituser {ID} --username {USERNAME} &&/|| --password {PASSWORD} &&/|| --role {ROLE})
+  // Edit Contact Command (editcontact {ID} --firstname {FIRSTNAME} &&/|| --lastname {LASTNAME} &&/|| --phone {PHONE} &&/|| --email {EMAIL} &&/|| --companyid {COMPANYID})
   @ShellMethod(value = "Edit Contact", key = "editcontact", group = "Contact")
-  public String putUser(int id, @ShellOption(defaultValue = ShellOption.NULL) String username,
-                        @ShellOption(defaultValue = ShellOption.NULL) String password,
-                        @ShellOption(defaultValue = ShellOption.NULL) String role) {
+  public String putContact(int id, @ShellOption(defaultValue = ShellOption.NULL) String firstname,
+                           @ShellOption(defaultValue = ShellOption.NULL) String lastname,
+                           @ShellOption(defaultValue = ShellOption.NULL) String phone,
+                           @ShellOption(defaultValue = ShellOption.NULL) String email,
+                           @ShellOption(defaultValue = ShellOption.NULL)Integer companyid) {
+    
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
+    ObjectMapper mapper = new ObjectMapper();
+    ObjectNode contactJsonObject = mapper.createObjectNode();
     
-    String usernameParam = username != null ? "username=" + username : "";
-    String passwordParam = password != null ? "&password=" + password : "";
-    String roleParam = role != null ? "&role=" + role.toUpperCase() : "";
+    String url = "http://localhost:8080/api/contact/" + id;
     
-    if (!usernameParam.isEmpty() && passwordParam.startsWith("&")) passwordParam = passwordParam.substring(1);
-    if ((!usernameParam.isEmpty() || !passwordParam.isEmpty()) && roleParam.startsWith("&")) roleParam = roleParam.substring(1);
-    if (!usernameParam.isEmpty() && !passwordParam.isEmpty() && passwordParam.charAt(0) != '&') passwordParam = "&" + passwordParam;
-    if ((!usernameParam.isEmpty() || !passwordParam.isEmpty()) && !roleParam.isEmpty() && roleParam.charAt(0) != '&') roleParam = "&" + roleParam;
+    if (firstname != null) contactJsonObject.put("firstname", firstname);
+    if (lastname != null) contactJsonObject.put("lastname", lastname);
+    if (phone != null) contactJsonObject.put("phone", phone);
+    if (email != null) contactJsonObject.put("email", email);
+    if (companyid != null) url += "?companyId=" + companyid;
     
-    HttpEntity<String> request = new HttpEntity<>(headers);
+    HttpEntity<String> request = new HttpEntity<>(contactJsonObject.toString(), headers);
     
-    return restTemplate.exchange("http://localhost:8080/api/user/" + id + "?" + usernameParam + passwordParam + roleParam, HttpMethod.PUT, request, String.class).getBody();
+    return restTemplate.exchange(url, HttpMethod.PUT, request, String.class).getBody();
   }
   
-  // Delete User Command (deluser {ID})
+  // Delete Contact Command (delcontact {ID})
   @ShellMethod(value = "Delete Contact", key = "delcontact", group = "Contact")
-  public void delUser (int id){
+  public void delContact (int id){
     restTemplate.delete("http://localhost:8080/api/contact/" + id, HttpMethod.DELETE, String.class);
   }
 }
