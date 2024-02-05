@@ -114,10 +114,12 @@ public class InvoiceCommands {
         ObjectNode contactJsonObject = mapper.createObjectNode();
         
         String url = "http://localhost:8080/api/invoice/" + id;
-        
-        if (companyId != null) url += "?companyId=" + companyId;
-        if (contactId != null) url += "?contactId=" + contactId;
+
         if (companyId != null && contactId != null) url += "?companyId=" + companyId + "&contactId=" + contactId;
+        else{
+            if (companyId != null) url += "?companyId=" + companyId;
+            if (contactId != null) url += "?contactId=" + contactId;
+        }
         
         HttpEntity<String> request = new HttpEntity<>(contactJsonObject.toString(), headers);
         
@@ -134,7 +136,7 @@ public class InvoiceCommands {
         HttpEntity <String> request = new HttpEntity <> (headers);
 
         try{
-            return restTemplate.exchange("http://localhost:8080/api/invoice/" + id, HttpMethod.DELETE, request, String.class).toString();
+            return restTemplate.exchange("http://localhost:8080/api/invoice/" + id, HttpMethod.DELETE, request, String.class).getBody();
         }catch (Exception ex){
             return ex.getMessage();
         }

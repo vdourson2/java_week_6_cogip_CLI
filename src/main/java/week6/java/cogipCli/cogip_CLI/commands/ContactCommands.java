@@ -95,14 +95,12 @@ public class ContactCommands {
     contactJsonObject.put("email", email);
 
     String url = "http://localhost:8080/api/contact";
-    System.out.println("company id");
     if (companyId != null) url += "?companyId=" + companyId;
     
     HttpEntity<String> request = new HttpEntity<>(contactJsonObject.toString(), headers);
     
     try {
-      restTemplate.postForObject(url, request, String.class);
-      return "updated";
+      return restTemplate.postForObject(url, request, String.class);
     }catch (Exception ex){
       return ex.getMessage();
     }

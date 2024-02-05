@@ -49,7 +49,7 @@ public class UserCommands {
     HttpEntity <String> request = new HttpEntity <> (headers);
 
     try {
-      String response = restTemplate.exchange("http://localhost:8080/api/user", HttpMethod.GET, request, String.class).toString();
+      String response = restTemplate.exchange("http://localhost:8080/api/user", HttpMethod.GET, request, String.class).getBody();
       return getString(pretty, response);
     }catch (Exception ex){
       return ex.getMessage();
@@ -64,7 +64,7 @@ public class UserCommands {
     HttpEntity <String> request = new HttpEntity <> (headers);
 
     try {
-      String response = restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.GET, request, String.class).toString();
+      String response = restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.GET, request, String.class).getBody();
       return getString(pretty, response);
     }catch (Exception ex){
       return ex.getMessage();
@@ -73,7 +73,7 @@ public class UserCommands {
   
   // Post User Command (adduser {USERNAME} {PASSWORD} {ROLE})
   @ShellMethod(value = "Post User", key = "adduser", group = "User")
-  public String postUser(String username, String password, @ShellOption (defaultValue = "USER")String role) {
+  public String postUser(String username, String password, @ShellOption String role) {
     if (tokenWrapper.getToken() != null) headers.setBearerAuth(tokenWrapper.getToken());
     
     ObjectMapper mapper = new ObjectMapper();
@@ -82,9 +82,12 @@ public class UserCommands {
     userJsonObject.put("password", password);
     
     HttpEntity<String> request = new HttpEntity<>(userJsonObject.toString(), headers);
+
+    String url = "http://localhost:8080/api/user";
+    if (role != null) url += "?role=" + role.toUpperCase();
     
     try {
-      return restTemplate.postForObject("http://localhost:8080/api/user?role=" + role.toUpperCase(), request, String.class);
+      return restTemplate.postForObject(url, request, String.class);
     }catch (Exception ex){
       return ex.getMessage();
     }
@@ -120,7 +123,7 @@ public class UserCommands {
     HttpEntity <String> request = new HttpEntity <> (headers);
 
     try {
-      return restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.DELETE, request, String.class).toString();
+      return restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.DELETE, request, String.class).getBody();
     }catch (Exception ex){
       return ex.getMessage();
     }

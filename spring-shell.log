@@ -398,3 +398,49 @@
 1707132557900:addinvoice
 1707132567736:addinvoice 1
 1707132602406:addinvoice 1 1
+1707137377452:login Admin Admin#1
+1707137381150:allcontacts
+1707137388833:allcontacts --pretty
+1707137398308:contactid 1
+1707137439041:add contact Test testin 0123456789 testétest.com 1
+1707137447816:addcontact Test testin 0123456789 testétest.com 1
+1707137474114:addcontact Test testin 0123456789 test@test.com 1
+1707137554706:login Admin Admin#1
+1707137562310:addcontact Test testin 0123456789 test@test.com 1
+1707137688494:editcontact 8 --lastname test2
+1707137714825:delcontact 8
+1707137748330:allusers
+1707137806510:allusers --pretty
+1707137864310:login Admin Admin#1
+1707137867228:allusers
+1707138227379:userid 1
+1707138277675:adduser Justine Password#123 ADMIN
+1707138346541:edituser 4
+1707138362896:deluser 4
+1707138408914:login Admin Admin#1
+1707138411391:adduser Justine Password#123 ADMIN
+1707138547151:login Admin Admin#1
+1707138553189:adduser Justine Password#123 ADMIN
+1707139081479:login Admin Admin#1
+1707139088933:adduser Justine Password#123 ADMIN
+1707139123437:adduser User User#1 USER
+1707139131590:login User User#1
+1707139141142:adduser Justine Password#123
+1707139281170:login User User#1
+1707139289423:adduser Test Test#1
+1707139325829:edituser 12
+1707139336081:login Admin Admin#1
+1707139341156:adituser 12
+1707139348147:edituser 12
+1707139356681:deluser 12
+1707139390872:allinvoices
+1707139452925:invoiceid 1
+1707139467897:addinvoice 1 1
+1707139486790:editinvoice 1
+1707139583957:login Admin Admin#1
+1707139591762:editinvoice 1
+1707139650374:login Admin Admin#1
+1707139656803:editinvoice 1
+1707139808562:login Admin Admin#1
+1707139814592:editinvoice 1
+1707139902026:delinvoice 3
