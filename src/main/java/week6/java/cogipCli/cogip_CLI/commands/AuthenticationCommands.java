@@ -34,7 +34,7 @@ public class AuthenticationCommands {
 
         HttpEntity<String> request = new HttpEntity<>(userJsonObject.toString(), headers);
 
-
+        // If login succeed store the token
         try{
             String result = restTemplate.postForObject("http://localhost:8080/login", request, String.class);
             JSONObject json = new JSONObject(result);

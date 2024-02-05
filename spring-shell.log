@@ -209,3 +209,192 @@
 1706882137268:stacktrace
 1706882207236:adduser Admin Admin#1
 1706882412697:login Admin Admin#1
+1706883634425:allcontacts
+1706883649917:login adm adm
+1706884721661:login Admin Admin#1
+1706884742857:allcontacts
+1706884757040:contactid 1
+1706884796329:addcontact Test Testing 0123456789 test@test.com
+1706884822117:addcontact Test Testing 0123456789 test@test.com 1
+1706884847229:editcontact 4 --lastname Test2
+1706884860209:delcontact 4
+1706884947519:addcontact Test testing 0123456789 test@test.com 1
+1706884962045:allcontacts
+1706884981535:addcontact Test testing 0123456789 test@test.com 1
+1706885038457:addcontact Test testing 0123456789 test@testing.com 1
+1706885044912:stacktrace
+1706885084084:allcontacts
+1706885103981:allinvoices
+1706885117692:invoiceid 1
+1706885125145:contactid 1
+1706885132245:addcontact
+1706885196680:editcontact --id 1
+1706885566229:allcontacts
+1706885683160:contactid 1
+1706885714491:addcontact Test testinf 0123456789 test@test.com 1
+1706885755603:editcontact 1
+1706885761332:delcontact 1
+1706885831145:login Admin Admin#1
+1706885866103:addcontact Test testing 0123456789 test@tet.com
+1706885886212:addcontact Test testing 0123456789 null 1
+1707122391259:login Admin Admin#1
+1707122416915:editcontact Test testing 0123456789 test@test.com
+1707122492980:login Admin Admin#1
+1707122498595:editcontact Test testing 0123456789 test@test.com
+1707122532933:login Admin Admin#1
+1707122537960:editcontact Test testing 0123456789 test@test.com
+1707122630750:login Admin Admin#1
+1707122636139:editcontact Test testing 0123456789 test@test.com
+1707122642551:stacktrace
+1707122668301:editcontact 1 Test testing 0123456789 test@test.com
+1707122704619:addcontact Test testing 0123456789 test@test.com
+1707122731673:login Admin Admin#1
+1707122736828:addcontact Test testing 0123456789 test@test.com
+1707122758453:login Admin Admin#1
+1707122763623:addcontact Test testing 0123456789 test@test.com
+1707122809750:login Admin Admin#1
+1707122814933:addcontact Test testing 0123456789 test@test.com
+1707122872396:login Admin Admin#1
+1707122874885:addcontact Test testing 0123456789 test@test.com
+1707123014961:login Admin Admin#1
+1707123033272:addcontact Test testing 0123456789 test@test.com
+1707123045695:stacktrace
+1707123086823:login Admin Admin#1
+1707123101352:addcontact Test testing 0123456789 test@test.com
+1707123188820:login Admin Admin#1
+1707123203909:addcontact Test testing 0123456789 test@test.com
+1707123420224:login Admin Admin#1
+1707123445078:allcontacts
+1707123462799:addcontact Test testing 0123456789 test@test.com
+1707123503912:login Admin Admin#1
+1707123515128:allcontacts
+1707123536290:addcontact Test testing 0123456789 test@test.com
+1707123565034:allcontacts
+1707123567942:addcontact Test testing 0123456789 test@test.com
+1707123604139:allcontacts
+1707123605910:System.out.println("Test");
+1707123616300:addcontact Test testing 0123456789 test@test.com
+1707123623767:login Admin Admin#1
+1707123636246:allcontacts
+1707123647301:addcontact Test testing 0123456789 test@test.com
+1707123714091:login Admin Admin#1
+1707123726346:addcontact Test testing 0123456789 test@test.com
+1707123731042:addcontact Test testing 0123456789 test@test.com 1
+1707123777198:editcontact 1 --lastname test
+1707123788352:delcontact 1
+1707123797414:contactid 1
+1707123868227:login Admin Admin#1
+1707123883151:addcontact Test testing 0123456789 test@test.com
+1707123892452:allcontacts
+1707123924103:login Admin Admin#1
+1707123933026:allcontacts
+1707123976640:addcontact Test testing 0123456789 test@test.com 1
+1707124267899:allcontacts
+1707124292428:addcontact Test testing 0123456789 test@test.com 1
+1707124410579:allcontacts
+1707124421279:addcontact Test testing 0123456789 test@test.com 1
+1707124471765:allcontacts
+1707124481560:addcontact Test testing 0123456789 test@test.com 1
+1707125046900:allcontacts
+1707125241615:addcontact Test testing 0123456789 test@test.com 1
+1707125575511:org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 : [no body]
+1707125589913:allcontacts
+1707125787316:addcontact Test testing 0123456789 test@test.com 1
+1707125873010:allcontacts
+1707125926588:addcontact Test testing 0123456789 test@test.com 1
+1707125984865:allcontacts
+1707126047354:addcontact Test testing 0123456789 test@test.com 1
+1707126075381:allcontacts
+1707126080008:addcontact Test testing 0123456789 test@test.com 1
+1707126099760:allcontacts
+1707126101624:addcontact Test testing 0123456789 test@test.com 1
+1707126243639:allcontacts
+1707126256297:addcontact Test testing 0123456789 test@test.com 1
+1707127095814:allcontacts
+1707127098751:addcontact Test testing 0123456789 test@test.com 1
+1707127151424:login Admin Admin#1
+1707127164932:allcontacts
+1707127169537:addcontact Test testing 0123456789 test@test.com 1
+1707127222585:allcontacts
+1707127224453:addcontact Test testing 0123456789 test@test.com 1
+1707127233328:login Admin Admin#1
+1707127243083:allcontacts
+1707127248515:addcontact Test testing 0123456789 test@test.com 1
+1707127253138:editcontacts 1
+1707127259909:editcontact 1
+1707127264825:delcontacts 1
+1707127269655:delcontact 1
+1707127284478:login Admin Admin#1
+1707127290185:addcontact Test testing 0123456789 test@test.com
+1707127357502:login Admin Admin#1
+1707127363028:addcontact Test testing 0123456789 test@test.com
+1707127581600:login Admin Admin#1
+1707127586587:addcontact Test testing 0123456789 test@test.com 1
+1707127679764:login Admin Admin#1
+1707127687121:addcontact Test testing 0123456789 test@test.com
+1707127729830:login Admin Admin#1
+1707127735825:addcontact Test testing 0123456789 test@test.com
+1707127827724:login Admin Admin#1
+1707127834441:addcontact Test testing 0123456789 test@test.com 1
+1707127846107:addcontact Test testing 0123456789 test@test.com
+1707127866764:login Admin Admin#1
+1707127871800:addcontact Test testing 0123456789 test@test.com 1
+1707127878758:addcontact Test testing 0123456789 test@test.com
+1707127923461:login Admin Admin#1
+1707127928892:addcontact Test testing 0123456789 test@test.com
+1707128110907:login Admin Admin#1
+1707128115286:addcontact Test testing 0123456789 test@test.com
+1707128170829:login Admin Admin#1
+1707128176517:addcontact Test testing 0123456789 test@test.com
+1707128247970:login Admin Admin#1
+1707128252889:addcontact Test testing 0123456789 test@test.com
+1707128287303:login Admin Admin#1
+1707128293226:addcontact Test testing 0123456789 test@test.com
+1707128316866:addcontact Test testing 0123456789
+1707128330518:addcontact Test testing 0123456789 --companyid 1
+1707128367093:addcontact --companyid 1
+1707128396115:addcontact --companyId 1
+1707128423448:addcontact Test testing 0123456789 test@test.com
+1707128439561:addcontact Test testing 012345678 test@test.com 1
+1707128457419:addcontact Te testing 0123456789 test@test.com 1
+1707128493477:login Admin Admin#1
+1707128500798:addcontact Test testing 012345678 test@test.com 1
+1707128507095:addcontact Test testing 0123456789 test@test.com
+1707128609238:login Admin Admin#1
+1707128615977:addcontact Test testing 0123456789 test@test.com
+1707128624837:addcontact Test testing 012345678 test@test.com 1
+1707128693235:login Admin Admin#1
+1707128700113:addcontact Test testing 012345678 test@test.com 1
+1707129026390:login Admin Admin#1
+1707129038447:addcontact Test testing 0123456789 test@test.com
+1707129104111:login Admin Admin#1
+1707129108876:addcontact Test testing 0123456789 test@test.com
+1707129117457:addcontact 1 testing 0123456789 test@test.com 1
+1707129137034:addcontact Test testing 0123456789 test@test.com 1
+1707129167090:login Admin Admin#1
+1707129174725:addcontact 1 testing 0123456789 test@test.com 1
+1707129185157:addcontact Test testing 0123456789 test@test.com
+1707129199859:addcontact Test
+1707131580139:login Admin Admin#1
+1707131586309:addcontact Test testing 0123456789 test@test.com
+1707131613921:login Admin Admin#1
+1707131619948:addcontact Test testing 0123456789 test@test.com
+1707131742091:login Admin Admin#1
+1707131753999:addinvoice
+1707131781292:addinvoice --contactId null
+1707131797349:addinvoice --contactId null --companyId null
+1707131812774:addcontact Test testing 0123456789 test@test.com
+1707131861311:addcontact
+1707131871147:addcontact Test
+1707131897475:addinvoice 1
+1707131910340:addinvoice
+1707131929270:addinvoice --contactId 1
+1707131936873:addinvoice null
+1707131968876:addcontact Test testing 0123456789 test@test.com null
+1707131972350:addcontact Test testing 0123456789 test@test.com
+1707131983043:addcontact Test testing 0123456789 test@test.com null
+1707131986634:stacktrace
+1707132545158:login Admin Admin#1
+1707132557900:addinvoice
+1707132567736:addinvoice 1
+1707132602406:addinvoice 1 1

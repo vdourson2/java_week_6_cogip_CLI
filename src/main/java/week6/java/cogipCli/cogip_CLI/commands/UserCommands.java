@@ -45,30 +45,35 @@ public class UserCommands {
   @ShellMethod(value = "Get All Users", key = "allusers", group = "User")
   public String getAllUsers(@ShellOption(value = {"--pretty"})boolean pretty){
 
-    headers.setBearerAuth(tokenWrapper.getToken());
+    if (tokenWrapper.getToken() != null) headers.setBearerAuth(tokenWrapper.getToken());
     HttpEntity <String> request = new HttpEntity <> (headers);
 
-    String response = restTemplate.exchange("http://localhost:8080/api/user", HttpMethod.GET, request, String.class).toString();
-    
-    return getString(pretty, response);
+    try {
+      String response = restTemplate.exchange("http://localhost:8080/api/user", HttpMethod.GET, request, String.class).toString();
+      return getString(pretty, response);
+    }catch (Exception ex){
+      return ex.getMessage();
+    }
   }
   
   // Get User By ID Command (userid {ID}, userid {ID} --pretty)
   @ShellMethod(value = "Get User by ID", key = "userid", group = "User")
   public String getUserById(int id, @ShellOption(defaultValue = "false") boolean pretty){
 
-    headers.setBearerAuth(tokenWrapper.getToken());
+    if (tokenWrapper.getToken() != null) headers.setBearerAuth(tokenWrapper.getToken());
     HttpEntity <String> request = new HttpEntity <> (headers);
 
-    String response = restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.GET, request, String.class).toString();
-    
-    return getString(pretty, response);
+    try {
+      String response = restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.GET, request, String.class).toString();
+      return getString(pretty, response);
+    }catch (Exception ex){
+      return ex.getMessage();
+    }
   }
   
   // Post User Command (adduser {USERNAME} {PASSWORD} {ROLE})
   @ShellMethod(value = "Post User", key = "adduser", group = "User")
   public String postUser(String username, String password, @ShellOption (defaultValue = "USER")String role) {
-    //headers.setBearerAuth(tokenWrapper.getToken());
     if (tokenWrapper.getToken() != null) headers.setBearerAuth(tokenWrapper.getToken());
     
     ObjectMapper mapper = new ObjectMapper();
@@ -78,13 +83,17 @@ public class UserCommands {
     
     HttpEntity<String> request = new HttpEntity<>(userJsonObject.toString(), headers);
     
-    return restTemplate.postForObject("http://localhost:8080/api/user?role=" + role.toUpperCase(), request, String.class);
+    try {
+      return restTemplate.postForObject("http://localhost:8080/api/user?role=" + role.toUpperCase(), request, String.class);
+    }catch (Exception ex){
+      return ex.getMessage();
+    }
   }
   
   // Edit User Command (edituser {ID} --username {USERNAME} &&/|| --password {PASSWORD} &&/|| --role {ROLE})
   @ShellMethod(value = "Edit User", key = "edituser", group = "User")
   public String putUser(int id, @ShellOption(defaultValue = ShellOption.NULL) String username, @ShellOption(defaultValue = ShellOption.NULL) String password, @ShellOption(defaultValue = ShellOption.NULL) String role) {
-    headers.setBearerAuth(tokenWrapper.getToken());
+    if (tokenWrapper.getToken() != null) headers.setBearerAuth(tokenWrapper.getToken());
     
     String usernameParam = username != null ? "username=" + username : "";
     String passwordParam = password != null ? "&password=" + password : "";
@@ -97,15 +106,23 @@ public class UserCommands {
     
     HttpEntity<String> request = new HttpEntity<>(headers);
     
-    return restTemplate.exchange("http://localhost:8080/api/user/" + id + "?" + usernameParam + passwordParam + roleParam, HttpMethod.PUT, request, String.class).getBody();
+    try {
+      return restTemplate.exchange("http://localhost:8080/api/user/" + id + "?" + usernameParam + passwordParam + roleParam, HttpMethod.PUT, request, String.class).getBody();
+    }catch (Exception ex){
+      return ex.getMessage();
+    }
   }
   
   // Delete User Command (deluser {ID})
   @ShellMethod(value = "Delete User", key = "deluser", group = "User")
-  public void delUser (int id){
-    headers.setBearerAuth(tokenWrapper.getToken());
+  public String delUser (int id){
+    if (tokenWrapper.getToken() != null) headers.setBearerAuth(tokenWrapper.getToken());
     HttpEntity <String> request = new HttpEntity <> (headers);
 
-    restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.DELETE, request, String.class);
+    try {
+      return restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.DELETE, request, String.class).toString();
+    }catch (Exception ex){
+      return ex.getMessage();
+    }
   }
 }
