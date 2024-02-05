@@ -14,7 +14,6 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.web.client.RestTemplate;
 import week6.java.cogipCli.cogip_CLI.model.InvoiceMapping;
-import week6.java.cogipCli.cogip_CLI.entities.InvoiceMapping;
 import week6.java.cogipCli.cogip_CLI.security.BearerTokenWrapper;
 
 import java.util.List;

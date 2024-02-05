@@ -30,7 +30,7 @@ class ContactCommandsTest {
     }
 
     @Test
-    void testGetAllInvoices() {
+    void testGetAllContacts() {
         ShellTestClient.NonInteractiveShellSession session = client
                 .nonInterative("allcontacts")
                 .run();
@@ -42,7 +42,7 @@ class ContactCommandsTest {
     }
 
     @Test
-    void testGetInvoiceById() {
+    void testGetContactById() {
         ShellTestClient.NonInteractiveShellSession session = client
                 .nonInterative("contactid", "1")
                 .run();
@@ -54,7 +54,7 @@ class ContactCommandsTest {
     }
 
     @Test
-    void testUpdateInvoice() {
+    void testUpdateContact() {
         ShellTestClient.NonInteractiveShellSession session = client
                 .nonInterative("editcontact", "1")
                 .run();
@@ -66,7 +66,7 @@ class ContactCommandsTest {
     }
 
     @Test
-    void testDeleteUser() {
+    void testDeleteContact() {
         String id = "10";
 
         ShellTestClient.NonInteractiveShellSession session = client

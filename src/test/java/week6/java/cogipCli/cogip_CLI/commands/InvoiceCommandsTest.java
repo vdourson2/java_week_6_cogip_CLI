@@ -66,7 +66,7 @@ class InvoiceCommandsTest {
     }
 
     @Test
-    void testDeleteUser() {
+    void testDeleteInvoice() {
         String id = "21";
 
         ShellTestClient.NonInteractiveShellSession session = client

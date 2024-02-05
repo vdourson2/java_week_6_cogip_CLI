@@ -12,7 +12,6 @@ import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import week6.java.cogipCli.cogip_CLI.entities.ContactMapping;
 import week6.java.cogipCli.cogip_CLI.security.BearerTokenWrapper;
 import week6.java.cogipCli.cogip_CLI.model.ContactMapping;
 
