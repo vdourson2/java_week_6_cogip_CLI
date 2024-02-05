@@ -1,4 +1,4 @@
-package week6.java.cogipCli.cogip_CLI.entities;
+package week6.java.cogipCli.cogip_CLI.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

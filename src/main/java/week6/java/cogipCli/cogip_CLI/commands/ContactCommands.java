@@ -12,7 +12,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.web.client.RestTemplate;
-import week6.java.cogipCli.cogip_CLI.entities.ContactMapping;
+import week6.java.cogipCli.cogip_CLI.model.ContactMapping;
 
 import java.util.List;
 

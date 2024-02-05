@@ -1,4 +1,4 @@
-package week6.java.cogipCli.cogip_CLI.command;
+package week6.java.cogipCli.cogip_CLI.commands;
 
 import java.io.IOException;
 import java.util.ArrayList;
