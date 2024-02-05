@@ -5,6 +5,7 @@ HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
+spring-shell.log
 
 ### STS ###
 .apt_generated
