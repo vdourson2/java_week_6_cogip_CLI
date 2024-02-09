@@ -3,6 +3,8 @@ package week6.java.cogipCli.cogip_CLI.commands;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,11 +15,14 @@ import week6.java.cogipCli.cogip_CLI.security.BearerTokenWrapper;
 
 @ShellComponent
 public class AuthenticationCommands {
+    //String url = System.getProperty("url");
+    private Environment env;
     RestTemplate restTemplate = new RestTemplate();
     BearerTokenWrapper bearerTokenWrapper;
 
-    public AuthenticationCommands(BearerTokenWrapper bearerTokenWrapper){
+    public AuthenticationCommands(BearerTokenWrapper bearerTokenWrapper, Environment env){
         this.bearerTokenWrapper = bearerTokenWrapper;
+        this.env = env;
     }
 
     // Command for the post login
@@ -35,7 +40,7 @@ public class AuthenticationCommands {
 
         // If login succeed store the token
         try{
-            String result = restTemplate.postForObject("http://localhost:8080/login", request, String.class);
+            String result = restTemplate.postForObject(env.getProperty("url") + "/login", request, String.class);
             JSONObject json = new JSONObject(result);
             String token = json.get("token").toString();
             bearerTokenWrapper.setToken(token);

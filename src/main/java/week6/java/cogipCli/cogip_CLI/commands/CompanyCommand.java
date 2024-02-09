@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -23,19 +24,20 @@ import week6.java.cogipCli.cogip_CLI.model.CompanyObject;
 @Getter
 @Setter
 public class CompanyCommand {
-	
+	private Environment env;
 	private RestTemplate restTemplate;
 	
 	@Autowired
-	public CompanyCommand(RestTemplate restTemplate) {
+	public CompanyCommand(RestTemplate restTemplate, Environment env) {
 		this.restTemplate = restTemplate;
+		this.env = env;
 	}
 	
 	//This command list the companies with essential informations: name, VAT number, associated invoices, and contacts.
 	@ShellMethod(key="companies", value="Company listing with essential information: name, VAT number, associated invoices, and contacts")
 	public String listCompanies(@ShellOption (defaultValue = "false") boolean pretty) {
 		
-		String url = "http://localhost:8080/api/company";
+		String url = env.getProperty("url") + "/api/company";
 		
 		// Fetch JSON response as String wrapped in ResponseEntity
 		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);

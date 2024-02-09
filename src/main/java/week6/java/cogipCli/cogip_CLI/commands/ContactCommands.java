@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
@@ -33,15 +34,17 @@ public class ContactCommands {
     }
     return response;
   }
-  
+
+  Environment env;
   RestTemplate restTemplate = new RestTemplate();
   BearerTokenWrapper tokenWrapper;
 
   HttpHeaders headers = new HttpHeaders();
 
-  public ContactCommands(BearerTokenWrapper tokenWrapper){
+  public ContactCommands(BearerTokenWrapper tokenWrapper, Environment env){
     this.tokenWrapper = tokenWrapper;
     headers.setContentType(MediaType.APPLICATION_JSON);
+    this.env = env;
   }
 
   
@@ -54,7 +57,7 @@ public class ContactCommands {
     try{
       List<ContactMapping> contactMappings = new ObjectMapper()
               .readerFor(new TypeReference<List<ContactMapping>>() {})
-              .readValue(restTemplate.exchange("http://localhost:8080/api/contact", HttpMethod.GET ,request, String.class).getBody());
+              .readValue(restTemplate.exchange(env.getProperty("url") + "/api/contact", HttpMethod.GET ,request, String.class).getBody());
 
       String json = new ObjectMapper().writeValueAsString(contactMappings);
       return getString(pretty, json);
@@ -73,7 +76,7 @@ public class ContactCommands {
     try {
       ContactMapping contactMappings = new ObjectMapper()
               .readerFor(new TypeReference<ContactMapping>() {})
-              .readValue(restTemplate.exchange("http://localhost:8080/api/contact/" + id, HttpMethod.GET, request, String.class).getBody());
+              .readValue(restTemplate.exchange(env.getProperty("url") + "/api/contact/" + id, HttpMethod.GET, request, String.class).getBody());
 
       String json = new ObjectMapper().writeValueAsString(contactMappings);
       return getString(pretty, json);
@@ -94,7 +97,7 @@ public class ContactCommands {
     contactJsonObject.put("phone", phone);
     contactJsonObject.put("email", email);
 
-    String url = "http://localhost:8080/api/contact";
+    String url = env.getProperty("url") + "/api/contact";
     if (companyId != null) url += "?companyId=" + companyId;
     
     HttpEntity<String> request = new HttpEntity<>(contactJsonObject.toString(), headers);
@@ -118,7 +121,7 @@ public class ContactCommands {
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode contactJsonObject = mapper.createObjectNode();
     
-    String url = "http://localhost:8080/api/contact/" + id;
+    String url = env.getProperty("url") + "/api/contact/" + id;
     
     if (firstname != null) contactJsonObject.put("firstname", firstname);
     if (lastname != null) contactJsonObject.put("lastname", lastname);
@@ -142,7 +145,7 @@ public class ContactCommands {
     HttpEntity <String> request = new HttpEntity <> (headers);
 
     try {
-      return restTemplate.exchange("http://localhost:8080/api/contact/" + id, HttpMethod.DELETE, request, String.class).getBody();
+      return restTemplate.exchange(env.getProperty("url") + "/api/contact/" + id, HttpMethod.DELETE, request, String.class).getBody();
     }catch (Exception ex){
       return ex.getMessage();
     }

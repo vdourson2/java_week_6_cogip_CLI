@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,14 +22,15 @@ import java.util.List;
 @ShellComponent
 @ShellCommandGroup("Invoice")
 public class InvoiceCommands {
-
+    Environment env;
     RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = new HttpHeaders();
     BearerTokenWrapper tokenWrapper;
 
-    public InvoiceCommands(BearerTokenWrapper tokenWrapper){
+    public InvoiceCommands(BearerTokenWrapper tokenWrapper, Environment env){
         this.tokenWrapper = tokenWrapper;
         headers.setContentType(MediaType.APPLICATION_JSON);
+        this.env = env;
     }
 
     private String getString(@ShellOption({"--pretty"}) boolean pretty, String response) {
@@ -55,7 +57,7 @@ public class InvoiceCommands {
         try {
             List<InvoiceMapping> invoicesMappings = new ObjectMapper()
                     .readerFor(new TypeReference<List<InvoiceMapping>>() {})
-                    .readValue(restTemplate.exchange("http://localhost:8080/api/invoice", HttpMethod.GET, request, String.class).getBody());
+                    .readValue(restTemplate.exchange(env.getProperty("url") + "/api/invoice", HttpMethod.GET, request, String.class).getBody());
 
             String json = new ObjectMapper().writeValueAsString(invoicesMappings);
             return getString(pretty, json);
@@ -73,7 +75,7 @@ public class InvoiceCommands {
         try{
             InvoiceMapping invoiceMappings = new ObjectMapper()
                     .readerFor(new TypeReference<InvoiceMapping>() {})
-                    .readValue(restTemplate.exchange("http://localhost:8080/api/invoice/" + id, HttpMethod.GET, request, String.class).getBody());
+                    .readValue(restTemplate.exchange(env.getProperty("url") + "/api/invoice/" + id, HttpMethod.GET, request, String.class).getBody());
 
             String json = new ObjectMapper().writeValueAsString(invoiceMappings);
             return getString(pretty, json);
@@ -91,7 +93,7 @@ public class InvoiceCommands {
 
         HttpEntity<String> request = new HttpEntity<>(contactJsonObject.toString(), headers);
 
-        String url = "http://localhost:8080/api/invoice";
+        String url = env.getProperty("url") + "/api/invoice";
         if (companyId != null && contactId != null) url += "?companyId=" + companyId + "&contactId=" + contactId;
         else{
             if (companyId != null) url += "?companyId=" + companyId;
@@ -113,7 +115,7 @@ public class InvoiceCommands {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode contactJsonObject = mapper.createObjectNode();
         
-        String url = "http://localhost:8080/api/invoice/" + id;
+        String url = env.getProperty("url") + "/api/invoice/" + id;
 
         if (companyId != null && contactId != null) url += "?companyId=" + companyId + "&contactId=" + contactId;
         else{
@@ -136,7 +138,7 @@ public class InvoiceCommands {
         HttpEntity <String> request = new HttpEntity <> (headers);
 
         try{
-            return restTemplate.exchange("http://localhost:8080/api/invoice/" + id, HttpMethod.DELETE, request, String.class).getBody();
+            return restTemplate.exchange(env.getProperty("url") + "/api/invoice/" + id, HttpMethod.DELETE, request, String.class).getBody();
         }catch (Exception ex){
             return ex.getMessage();
         }

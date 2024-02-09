@@ -3,6 +3,7 @@ package week6.java.cogipCli.cogip_CLI.commands;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.core.env.Environment;
 import org.springframework.expression.spel.ast.BeanReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -30,15 +31,16 @@ public class UserCommands {
     }
     return response;
   }
-  
+  Environment env;
   RestTemplate restTemplate = new RestTemplate();
   BearerTokenWrapper tokenWrapper;
   HttpHeaders headers;
 
-  public UserCommands(BearerTokenWrapper tokenWrapper){
+  public UserCommands(BearerTokenWrapper tokenWrapper, Environment env){
     this.tokenWrapper = tokenWrapper;
     this.headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
+    this.env = env;
   }
   
   // Get All Users Command (allusers, allusers --pretty)
@@ -49,7 +51,7 @@ public class UserCommands {
     HttpEntity <String> request = new HttpEntity <> (headers);
 
     try {
-      String response = restTemplate.exchange("http://localhost:8080/api/user", HttpMethod.GET, request, String.class).getBody();
+      String response = restTemplate.exchange(env.getProperty("url") + "/api/user", HttpMethod.GET, request, String.class).getBody();
       return getString(pretty, response);
     }catch (Exception ex){
       return ex.getMessage();
@@ -64,7 +66,7 @@ public class UserCommands {
     HttpEntity <String> request = new HttpEntity <> (headers);
 
     try {
-      String response = restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.GET, request, String.class).getBody();
+      String response = restTemplate.exchange(env.getProperty("url") + "/api/user/" + id, HttpMethod.GET, request, String.class).getBody();
       return getString(pretty, response);
     }catch (Exception ex){
       return ex.getMessage();
@@ -83,7 +85,7 @@ public class UserCommands {
     
     HttpEntity<String> request = new HttpEntity<>(userJsonObject.toString(), headers);
 
-    String url = "http://localhost:8080/api/user";
+    String url = env.getProperty("url") + "/api/user";
     if (role != null) url += "?role=" + role.toUpperCase();
     
     try {
@@ -110,7 +112,7 @@ public class UserCommands {
     HttpEntity<String> request = new HttpEntity<>(headers);
     
     try {
-      return restTemplate.exchange("http://localhost:8080/api/user/" + id + "?" + usernameParam + passwordParam + roleParam, HttpMethod.PUT, request, String.class).getBody();
+      return restTemplate.exchange(env.getProperty("url") + "/api/user/" + id + "?" + usernameParam + passwordParam + roleParam, HttpMethod.PUT, request, String.class).getBody();
     }catch (Exception ex){
       return ex.getMessage();
     }
@@ -123,7 +125,7 @@ public class UserCommands {
     HttpEntity <String> request = new HttpEntity <> (headers);
 
     try {
-      return restTemplate.exchange("http://localhost:8080/api/user/" + id, HttpMethod.DELETE, request, String.class).getBody();
+      return restTemplate.exchange(env.getProperty("url") + "/api/user/" + id, HttpMethod.DELETE, request, String.class).getBody();
     }catch (Exception ex){
       return ex.getMessage();
     }
